@@ -18,7 +18,7 @@ namespace Factory.Controllers
 
     public ActionResult Index(string searchString)
     {
-      ViewBag.PageTitle = "View All Courses";
+      ViewBag.PageTitle = "All Engineers";
       if (!String.IsNullOrEmpty(searchString))
       {
         List<Engineer> model = _db.Engineers
