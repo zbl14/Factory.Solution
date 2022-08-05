@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using ProjectName.Models;
+using Factory.Models;
 using System.Collections.Generic;
 using System.Linq;
 // using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace ProjectName.Controllers
+namespace Factory.Controllers
 {
-  public class ClassNamesController : Controller
+  public class MachinesController : Controller
   {
 
   }
