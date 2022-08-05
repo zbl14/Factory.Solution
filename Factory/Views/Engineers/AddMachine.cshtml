@@ -2,10 +2,10 @@
   Layout = "_Layout";
 }
 
-@model Factory.Models.Engineer
+@model Factory.Models.Engineer;
 
 <div class="jumbotron text-center">
-  <h2>Details of @Html.DisplayFor(model => model.Name)</h2>
+  <h2>Add A Machine</h2>
 </div>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -37,33 +37,20 @@
   </div>
 </nav>
 <hr />
-<div>
-  @if(Model.JoinEntities.Count == 0)
+<div class="">
+  @using (Html.BeginForm())
   {
-    <h4>@Html.DisplayFor(model => model.Name) is Idel</h4>
+    @Html.HiddenFor(model => model.EngineerId)
+    <div class="form-group row mb-3">
+      @Html.Label("Select Machine", null, new { @class="col-form-label col-md-2"})
+      <div class="col-md-4">
+        @Html.DropDownList("MachineId", null, new { @class="form-control" })
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4 offset-md-2">   
+        <button type="submit" class="btn btn-outline-dark">Update</button>
+      </div>
+    </div>
   }
-  else
-  {
-    <h4>@Html.DisplayFor(model => model.Name) is Working on following machine(s)</h4>
-    @using (Html.BeginForm("DeleteMachine", "Engineers"))
-    {
-      <ul>
-        @foreach(var join in Model.JoinEntities)
-        {
-          @Html.Hidden("joinId", @join.EngineerMachineId)
-          <li>
-            @join.Machine.Name
-            <button type="submit" class="btn btn-outline-danger">Remove</button>
-          </li>
-        }
-      </ul>
-    }
-  }
-</div>
-<div class="mt-5">
-  <div class="btn-group btn-group" role="group" aria-label="Default button group">
-    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Assign Machines", "AddMachine", new { id = Model.EngineerId })</button>
-    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Update Engineer", "Edit", new { id = Model.EngineerId})</button>
-    <button type="button" class="btn btn-outline-danger">@Html.ActionLink("Fire Engineer", "Delete", new { id = Model.EngineerId})</button>
-  </div>
 </div>
