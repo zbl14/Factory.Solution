@@ -59,7 +59,7 @@
               @Html.ActionLink($"{machine.Name}", "Details", new { id = machine.MachineId }) 
             </div>
             <div class="col-sm-3">
-              @machine.NextInspectionDate
+              @Html.Label("Next Inspection Date: " + @machine.NextInspectionDate.ToString("MM/dd/yyyy"))
             </div>
           </div>
         </li> 

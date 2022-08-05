@@ -3,3 +3,65 @@
 }
 
 @model Factory.Models.Machine;
+
+<div class="jumbotron text-center">
+  <h2>Details of @Html.DisplayFor(model => model.Name)</h2>
+</div>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          @Html.ActionLink("Home", "Index", "Home", null, new { @class="nav-link" })
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Engineer
+          </a>
+          <ul class="dropdown-menu">
+            <li>@Html.ActionLink("All Engineers", "Index", "Engineers", null, new { @class="dropdown-item" })</li>
+            <li>@Html.ActionLink("Add New Engineer", "Create", "Engineers", null, new { @class="dropdown-item" })</li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Machine
+          </a>
+          <ul class="dropdown-menu">
+            <li>@Html.ActionLink("All Machines", "Index", "Machines", null, new { @class="dropdown-item" })</li>
+            <li>@Html.ActionLink("Add New Machine", "Create", "Machines", null, new { @class="dropdown-item" })</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<hr />
+<div>
+  @if(Model.JoinEntities.Count == 0)
+  {
+    <h4>@Html.DisplayFor(model => model.Name) is Not assigned to a engineer</h4>
+  }
+  else
+  {
+    <h4>@Html.LabelFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h4>
+    <h5>@Html.LabelFor(model => model.LastInspectionDate): @Html.DisplayFor(model => model.LastInspectionDate)</h5>
+    <h5>@Html.LabelFor(model => model.NextInspectionDate): @Html.DisplayFor(model => model.NextInspectionDate)</h5>
+    <h5>Assinged Engineer:</h5>
+    @foreach(var join in Model.JoinEntities)
+    {
+      @Html.Hidden("joinId", @join.EngineerMachineId)
+      <li>
+        @join.Engineer.Name 
+        <button type="submit" class="btn btn-outline-danger">Unassign</button>
+      </li>
+    }
+  }
+</div>
+<div class="mt-5">
+  <div class="btn-group btn-group" role="group" aria-label="Default button group">
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Assign Enginner", "AddEngineer", new { id = Model.MachineId })</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Update Machine", "Edit", new { id = Model.MachineId})</button>
+    <button type="button" class="btn btn-outline-danger">@Html.ActionLink("Remove Machine", "Delete", new { id = Model.MachineId})</button>
+  </div>
+</div>
