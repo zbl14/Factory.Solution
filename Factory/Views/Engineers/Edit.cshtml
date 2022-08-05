@@ -47,6 +47,9 @@
         @Html.EditorFor(model => model.Name, new { @class="form-control", @required="required"})
       </div>
     </div>
+
+    @Html.CheckBoxFor(model => model.IsWorking, new { @checked = "checked" })
+
     <div class="form-group row">
       <div class="col-sm-10 offset-sm-2">   
         <button type="submit" class="btn btn-outline-dark">Update</button>

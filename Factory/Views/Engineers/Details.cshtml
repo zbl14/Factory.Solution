@@ -52,6 +52,7 @@
         {
           @Html.Hidden("joinId", @join.EngineerMachineId)
           <li>
+            @join.Engineer.IsWorking
             @join.Machine.Name
             <button type="submit" class="btn btn-outline-danger">Remove</button>
           </li>
