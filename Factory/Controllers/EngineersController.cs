@@ -49,5 +49,15 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Details(int id)
+    {
+      var thisEngineer = _db.Engineers
+        .Include(engineer => engineer.JoinEntities)
+        .ThenInclude(join =>join.Machine)
+        .FirstOrDefault(engineer => engineer.EngineerId == id);
+      ViewBag.PageTitle = "Details";
+      return View(thisEngineer);
+    }
   }
 }
