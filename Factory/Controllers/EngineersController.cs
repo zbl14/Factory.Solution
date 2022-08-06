@@ -63,8 +63,9 @@ namespace Factory.Controllers
 
     public ActionResult Edit(int id)
     {
-      var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
       ViewBag.PageTitle = "Edit Engineer";
+      var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      thisEngineer.IsWorking = true;
       return View(thisEngineer);
     }
 
